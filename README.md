@@ -18,7 +18,11 @@ This is the **Student Performance Analysis and Prediction System**, not a fake-n
 
 ## Dataset and data-quality note
 
-The source spreadsheet was supplied for the assignment, but its original publisher and a public download URL were not provided. The data is intentionally not published because redistribution permission is unknown. Obtain a copy from the instructor or original provider, and only use/share it in accordance with its terms. Put an authorized CSV at `data/student_performance_dataset.csv`, or pass its path with `--data`. The required columns are checked by the script; invalid numeric targets are excluded rather than imputed. The generated report summarizes the data actually used.
+The source spreadsheet used for this project was supplied with the assignment, but its original publisher and a public download URL have not been verified. The data is intentionally not published because redistribution permission is unknown.
+
+The suggested [rashida048/Datasets `StudentsPerformance.csv`](https://github.com/rashida048/Datasets/blob/master/StudentsPerformance.csv) is **not** the dataset used by this project. Its columns describe race/ethnicity, lunch, test preparation, and math/reading/writing scores. The project CSV instead has fields such as `student_id`, `study_time_hours`, `attendance_percent`, `previous_grade`, and `final_exam_score`; this workflow predicts `final_exam_score`. The suggested file therefore cannot be cited as the source for the current model or its results.
+
+Obtain the assignment dataset from the instructor or its original provider, and only use/share it in accordance with its terms. Put an authorized compatible CSV at `data/student_performance_dataset.csv`, or pass its path with `--data`. The required columns are checked by the script; invalid numeric targets are excluded rather than imputed. The generated report summarizes the data actually used.
 
 The `final_grade` field is excluded because it is derived from the target score and would leak the answer. `student_id` is an identifier, not a predictor. `gender` is also excluded so the model focuses on actionable study and access factors rather than a demographic attribute. The model describes associations in this dataset; it does not establish that any factor causes a score change or diagnose an individual student's abilities.
 

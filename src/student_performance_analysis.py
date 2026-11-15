@@ -376,7 +376,9 @@ def build_report(
         Paragraph("4. Dataset description and source", styles["Heading1"]),
         Paragraph(
             f"The dataset has {quality['source_rows']:,} rows and {quality['source_columns']} columns. "
-            "Its original publisher and public URL were not provided. The target is final_exam_score. "
+            "The assignment spreadsheet's original publisher and public URL have not been verified. "
+            "The suggested https://github.com/rashida048/Datasets/blob/master/StudentsPerformance.csv "
+            "has a different schema and is not the dataset used here. The target is final_exam_score. "
             "Predictors are study_time_hours, attendance_percent, sleep_hours, previous_grade, "
             "parental_education, internet_access, extracurricular_activities, and part_time_job. "
             "student_id is retained only for traceability. gender and final_grade are excluded "
