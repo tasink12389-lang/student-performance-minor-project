@@ -16,13 +16,17 @@ The dataset, trained model, generated outputs, screenshots, and PDF report are n
 
 This is the **Student Performance Analysis and Prediction System**, not a fake-news detector. Its required machine-learning task is to predict final exam scores using Linear Regression; it also compares a cross-validated Ridge Regression model. Run `python src/model.py` to train and save the selected fitted pipeline to `models/student_score_model.joblib`. Its metrics and unseen-test predictions are written to `outputs/evaluation_results/`.
 
-## Dataset and data-quality note
+## Dataset source and data-quality note
 
-The source spreadsheet used for this project was supplied with the assignment, but its original publisher and a public download URL have not been verified. The data is intentionally not published because redistribution permission is unknown.
+The strongest source match found is [`student_performance_dataset. CSV.csv` in maimoonanishad2-blip/student-performance-dashboard](https://github.com/maimoonanishad2-blip/student-performance-dashboard/blob/409cf09e3fe2c1983e2f1b52c447a586ea090ec2/student_performance_dataset.%20CSV.csv), pinned to the commit in that link. This is a strong match to the assignment workbook, but it does not prove which GitHub URL the student originally downloaded.
+
+The GitHub file and local workbook each contain 1,000 rows and 12 columns after normalizing header names. All 1,000 rows match on every field except `final_exam_score`, and 959 rows match completely. In the other 41 local rows, `final_exam_score` is the literal text `final_exam_score`, while the matching GitHub rows contain numeric scores. The project excludes those 41 invalid local targets; it does not restore or impute them.
+
+The source repository does not declare a license in its repository metadata or root file listing. The dataset is intentionally not included here; verify redistribution permission before sharing or bundling it.
 
 The suggested [rashida048/Datasets `StudentsPerformance.csv`](https://github.com/rashida048/Datasets/blob/master/StudentsPerformance.csv) is **not** the dataset used by this project. Its columns describe race/ethnicity, lunch, test preparation, and math/reading/writing scores. The project CSV instead has fields such as `student_id`, `study_time_hours`, `attendance_percent`, `previous_grade`, and `final_exam_score`; this workflow predicts `final_exam_score`. The suggested file therefore cannot be cited as the source for the current model or its results.
 
-Obtain the assignment dataset from the instructor or its original provider, and only use/share it in accordance with its terms. Put an authorized compatible CSV at `data/student_performance_dataset.csv`, or pass its path with `--data`. The required columns are checked by the script; invalid numeric targets are excluded rather than imputed. The generated report summarizes the data actually used.
+For local reproduction, obtain an authorized copy of the matching data and place it at `data/student_performance_dataset.csv`, or pass its path with `--data`. The required columns are checked by the script; invalid numeric targets are excluded rather than imputed. The generated report summarizes the data actually used.
 
 The `final_grade` field is excluded because it is derived from the target score and would leak the answer. `student_id` is an identifier, not a predictor. `gender` is also excluded so the model focuses on actionable study and access factors rather than a demographic attribute. The model describes associations in this dataset; it does not establish that any factor causes a score change or diagnose an individual student's abilities.
 
@@ -75,7 +79,7 @@ It also writes the selected model to `models/student_score_model.joblib`. The fi
 
 ## Limitations
 
-The supplied spreadsheet has no source citation or context about how scores were collected. The 41 invalid target cells reduce the usable sample. Results may not generalize to other schools, cohorts, or grading systems. Some input factors may be self-reported or confounded. This project is intended for educational analysis and supportive discussion, not high-stakes student decisions.
+The GitHub file above is a strong data match, but the student's exact download path and the dataset's collection context are unverified. The 41 invalid target cells reduce the usable sample. Results may not generalize to other schools, cohorts, or grading systems. Some input factors may be self-reported or confounded. This project is intended for educational analysis and supportive discussion, not high-stakes student decisions.
 
 ## Student details
 

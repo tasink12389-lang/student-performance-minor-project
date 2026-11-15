@@ -31,6 +31,10 @@ from sklearn.preprocessing import OneHotEncoder, StandardScaler
 
 
 TARGET = "final_exam_score"
+DATASET_SOURCE_URL = (
+    "https://github.com/maimoonanishad2-blip/student-performance-dashboard/blob/"
+    "409cf09e3fe2c1983e2f1b52c447a586ea090ec2/student_performance_dataset.%20CSV.csv"
+)
 NUMERIC_FEATURES = [
     "study_time_hours",
     "attendance_percent",
@@ -376,7 +380,15 @@ def build_report(
         Paragraph("4. Dataset description and source", styles["Heading1"]),
         Paragraph(
             f"The dataset has {quality['source_rows']:,} rows and {quality['source_columns']} columns. "
-            "The assignment spreadsheet's original publisher and public URL have not been verified. "
+            f"For the original assignment workbook, the likely matching source is "
+            f'<link href="{DATASET_SOURCE_URL}">GitHub dataset CSV</link> '
+            "(commit 409cf09e3fe2c1983e2f1b52c447a586ea090ec2). Compared with that workbook, "
+            "after normalizing headers, all 1,000 rows match on non-target fields and 959 rows "
+            "match completely. In the remaining 41 local rows, final_exam_score is the literal text "
+            "final_exam_score while the candidate has numeric values; these invalid local targets "
+            "are excluded, not repaired. This strong match does not prove the student's exact "
+            "download path. A replacement CSV passed with --data is not checked against this "
+            "source. The candidate repository does not declare a license. "
             "The suggested https://github.com/rashida048/Datasets/blob/master/StudentsPerformance.csv "
             "has a different schema and is not the dataset used here. The target is final_exam_score. "
             "Predictors are study_time_hours, attendance_percent, sleep_hours, previous_grade, "
@@ -518,8 +530,10 @@ def build_report(
             Paragraph("Figure 8. Largest standardized linear-model coefficients; category terms are one-hot encoded.", styles["SmallNote"]),
             Paragraph("12. Limitations and future improvements", styles["Heading1"]),
             Paragraph(
-                "The dataset's provenance, collection process, grading scale, and cohort context "
-                "are unknown. Forty-one target cells are malformed. A random split within one "
+                "The GitHub file cited above is a strong match to the original assignment workbook, "
+                "but the student's exact download path, collection process, grading scale, and cohort "
+                "context are unverified. "
+                "Forty-one local target cells are malformed. A random split within one "
                 "dataset does not test performance across schools or future cohorts. Associations "
                 "may be confounded and model predictions have uncertainty. Future work should "
                 "validate data provenance, collect a larger representative sample, evaluate fairness "
@@ -538,9 +552,11 @@ def build_report(
                 styles["BodyText"],
             ),
             Paragraph(
-                "References: dataset supplied by the student for this assignment; no original "
-                "publisher or public URL was supplied. Python, pandas, NumPy, Matplotlib, "
-                "seaborn, and scikit-learn documentation.",
+                f"References: likely matching dataset source, "
+                f'<link href="{DATASET_SOURCE_URL}">GitHub dataset CSV</link> '
+                "(commit 409cf09e3fe2c1983e2f1b52c447a586ea090ec2) "
+                "(strong data match; exact download path not confirmed, and no license is declared); "
+                "Python, pandas, NumPy, Matplotlib, seaborn, and scikit-learn documentation.",
                 styles["SmallNote"],
             ),
             Spacer(1, 8),
